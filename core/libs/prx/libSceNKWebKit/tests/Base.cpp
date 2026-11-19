@@ -1257,6 +1257,11 @@ static void TestBundleFrameState() {
     const void* emptyName = WKBundleFrameCopyName(ref);
     Require(emptyName != nullptr && WKStringGetLength(emptyName) == 0);
     WKRelease(emptyName);
+    frame->name = NKWebKit::Make<NKWebKit::String>();
+    const void* normalizedName = WKBundleFrameCopyName(ref);
+    Require(!NKWebKit::Cast<NKWebKit::String>(normalizedName, __func__)->null);
+    Require(WKStringIsEmpty(normalizedName));
+    WKRelease(normalizedName);
     const void* emptyChildren = WKBundleFrameCopyChildFrames(ref);
     Require(emptyChildren != nullptr && WKArrayGetSize(emptyChildren) == 0);
     WKRelease(emptyChildren);
