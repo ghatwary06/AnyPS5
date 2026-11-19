@@ -18,7 +18,7 @@ const void* APS5_VABI WKBundleFrameCopyChildFrames(const void* frameRef) {
 
 const void* APS5_VABI WKBundleFrameCopyName(const void* frameRef) {
     const auto* frame = NKWebKit::Cast<NKWebKit::BundleFrame>(frameRef, __func__);
-    return NKWebKit::ToRef(frame->name ? frame->name : NKWebKit::String::FromUtf8(""));
+    return NKWebKit::ToRef(frame->name && !frame->name->null ? frame->name : NKWebKit::String::FromUtf8(""));
 }
 
 const void* APS5_VABI WKBundleFrameCopyURL(const void* frameRef) {
